@@ -1,4 +1,5 @@
 #include "Vector3D.h"
+
 Vector3D::Vector3D() : x(0), y(0), z(0){}
 Vector3D::Vector3D(float _x, float _y, float _z) : x(_x), y(_y), z(_z) {}
 Vector3D::Vector3D(physx::PxVec3 Pxvec3): x(Pxvec3.x), y(Pxvec3.y), z(Pxvec3.z) {}

@@ -10,6 +10,7 @@
 
 
 #include <ctype.h>
+#include <crtdbg.h>
 
 #include <PxPhysicsAPI.h>
 #include <vector>
@@ -22,6 +23,7 @@
 // Para las escenas del curso, se incluyen los headers de las prácticas y la escena vacía
 #include "SceneManager.h"
 #include "EmptyScene.h"
+#include "P0S_Scene.h"
 
 #include <foundation/PxSimpleTypes.h>
 #include <PxPhysicsVersion.h> // <- Macros for PhysX version checking
@@ -98,6 +100,7 @@ void initPhysics(bool interactive)
 	gScene = gPhysics->createScene(sceneDesc);
 	// Registrar las prácticas/escenas del curso
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
+	SceneManager::instance().registerScene<P0S_Scene>("P0S_Scene");
 	
 	// Cargar la escena inicial
 	SceneManager::instance().changeScene("EscenaVacia");
@@ -195,6 +198,15 @@ void onCollision(physx::PxActor* actor1, physx::PxActor* actor2)
 
 int main(int, const char*const*)
 {
+#if defined(_DEBUG) || defined(DEBUG)
+	// Habilita la comprobación automática de fugas de memoria al finalizar el programa
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
+
+	// Si quieres inspeccionar un 'allocation number' concreto tras detectar una fuga,
+	// puedes descomentar esta línea sustituyendo 'N' por el número del bloque:
+	// _CrtSetBreakAlloc(N);
+#endif
+
 #ifndef OFFLINE_EXECUTION 
 	extern void renderLoop();
 	renderLoop();
