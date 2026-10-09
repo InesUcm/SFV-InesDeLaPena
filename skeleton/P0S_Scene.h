@@ -72,7 +72,6 @@ public:
     }
 
     void cleanup() override {
-        // Liberación limpia invocado .release() sobre cada RenderItem exactamente como en la plantilla
         if (m_renderItemOrigin) {
             m_renderItemOrigin->release();
             m_renderItemOrigin = nullptr;
