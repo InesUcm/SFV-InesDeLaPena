@@ -25,6 +25,8 @@
 #include "EmptyScene.h"
 #include "P0S_Scene.h"
 #include "P1S_Scene.h"
+#include "P2S_Scene.h"
+
 #include "Particle.h"
 
 #include <foundation/PxSimpleTypes.h>
@@ -107,15 +109,16 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<EmptyScene>("EscenaVacia");
 	SceneManager::instance().registerScene<P0S_Scene>("P0S_Scene");
 	SceneManager::instance().registerScene<P1S_Scene>("P1S_Scene");
+	SceneManager::instance().registerScene<P2S_Scene>("P2S_Scene");
 	
 	// Cargar la escena inicial
-	SceneManager::instance().changeScene("EscenaVacia");
+	SceneManager::instance().changeScene("P2S_Scene");
 
 	//Paricula
 	Vector3D initialPos(-10.0f, 0.0f, 0.0f);
 	Vector3D initialVel(10.0f, 0.0f, 0.0f);
 	Vector3D Acc(-2.0f, 0.0f, 0.0f);
-	gParticle = new Particle(initialPos, initialVel, Acc);
+	//gParticle = new Particle(initialPos, initialVel, Acc);
 	
 }
 

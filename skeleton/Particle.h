@@ -15,6 +15,8 @@ protected:
 	Vector3D vel;
 	Vector3D acc;
 	float damping;
+	float timeAlive = 0.0f;
+	const float liveTime=3.0f;
 
 	physx:: PxTransform pose;
 	RenderItem* renderItem;
