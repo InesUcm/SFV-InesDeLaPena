@@ -10,9 +10,9 @@ public:
     explicit P2S_Scene(std::string name = "P2S_Scene") : Scene(std::move(name)) {}
 
     void init() override {
-        Vector3D pos(0, 50, 0);
+        Vector3D pos(0, 100, 0);
         Vector3D vel(0, -15, 0);
-        generador = new Generador(pos, vel, 50, -50);
+        generador = new Generador(pos, vel, 25, -25);
     }
 
     void update(double dt) override {

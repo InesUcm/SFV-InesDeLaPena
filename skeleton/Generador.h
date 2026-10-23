@@ -3,6 +3,7 @@
 #include "RenderUtils.hpp"
 #include "Particle.h"
 #include <random>
+#include <chrono>
 class Generador
 {
 public:
@@ -20,6 +21,6 @@ private:
 	physx::PxTransform pose;
 	std::vector<Particle*> particles;
 
-	std::default_random_engine generator;
+	static std::mt19937 generator;
 };
 

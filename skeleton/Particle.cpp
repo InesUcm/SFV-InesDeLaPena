@@ -1,13 +1,20 @@
 #include "Particle.h"
 #include <cmath>
+#include <iostream>
+
+std::mt19937 Particle::generator(static_cast<unsigned int>(
+	std::chrono::high_resolution_clock::now().time_since_epoch().count()
+	));
 
 //Constructor de particula con aceleracion
-Particle::Particle(Vector3D pos, Vector3D vel, Vector3D acc, float damping) : 
-	vel(vel), acc(acc), damping(damping)
+Particle::Particle(Vector3D pos, Vector3D vel, Vector4 color, Vector3D acc, float damping) :
+	vel(vel), color(color), acc(acc), damping(damping)
 {
 	pose = physx::PxTransform(pos);
 	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(0.8f));
-	renderItem = new RenderItem(shape, &pose, Vector4(0.0f, 0.8f, 1.0f, 1.0f));
+	renderItem = new RenderItem(shape, &pose, color);
+	liveTime = std::uniform_real_distribution<float>(3.0f, 6.0f)(generator);
+	std::cout << "Particula: " << liveTime << std::endl;
 }
 
 
