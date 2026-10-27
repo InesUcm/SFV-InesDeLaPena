@@ -9,6 +9,9 @@ class P1S_Scene : public Scene {
 public:
     explicit P1S_Scene(std::string name = "P1S_Scene") : Scene(std::move(name)) {}
 
+    ~P1S_Scene() {
+        cleanup();
+    }
 
     void init() override {
     }
@@ -16,6 +19,17 @@ public:
     void update(double dt) override {
         for (auto p : proyectiles) {
             p->update(dt);
+        }
+
+        for (auto it = proyectiles.begin(); it != proyectiles.end(); )
+        {
+            if ((*it)->isDead()) {
+                delete* it;
+                it = proyectiles.erase(it);
+            }
+            else {
+                ++it;
+            }
         }
     }
 
@@ -35,10 +49,10 @@ public:
 
     void cleanup() override {
         for (auto p : proyectiles) {
-            delete p;
-            p = nullptr;
+            delete p; // Borra los proyectiles que siguen vivos en pantalla
         }
         proyectiles.clear();
+       
     }
 
 private:

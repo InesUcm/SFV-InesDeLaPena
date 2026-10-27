@@ -29,9 +29,7 @@ void Particle::integrate(double dt)
 {
 	timeAlive += dt;
 	if (timeAlive > liveTime) {
-		Particle::~Particle();
-		delete this;
-		return;
+		dead = true;
 	}
 	semiImplicitEuler(dt);
 }

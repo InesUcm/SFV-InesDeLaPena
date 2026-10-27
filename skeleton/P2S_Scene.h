@@ -9,6 +9,10 @@ class P2S_Scene : public Scene {
 public:
     explicit P2S_Scene(std::string name = "P2S_Scene") : Scene(std::move(name)) {}
 
+    ~P2S_Scene() {
+        cleanup();
+    }
+
     void init() override {
         Vector3D pos(0, 100, 0);
         Vector3D vel(0, -15, 0);

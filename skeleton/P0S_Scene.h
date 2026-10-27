@@ -8,6 +8,10 @@ class P0S_Scene : public Scene {
 public:
     explicit P0S_Scene(std::string name = "P0S_Scene") : Scene(std::move(name)) {}
 
+    ~P0S_Scene() {
+        cleanup();
+    }
+
     void init() override {
         Vector3D u(3.0f, 1.0f, 0.0f);
         Vector3D v(0.0f, 4.0f, 0.0f);
@@ -37,29 +41,29 @@ public:
         m_transformZ = physx::PxTransform(axisZ);
         m_renderItemZ = new RenderItem(shape, &m_transformZ, Vector4(0.0f, 0.0f, 1.0f, 1.0f));
 
-        Vector3D D(0.0f, 0.0f, 1.0f);
-        Vector3D P_1(2.0f, 0.0f, 3.0f);
-        Vector3D P_2(-4.0f, 0.0f, 1.0f);
-        Vector3D P_3(0.0f, 0.0f, -5.0f);
-        Vector3D P_4(3.0f, 0.0f, 0.0f);
+        //Vector3D D(0.0f, 0.0f, 1.0f);
+        //Vector3D P_1(2.0f, 0.0f, 3.0f);
+        //Vector3D P_2(-4.0f, 0.0f, 1.0f);
+        //Vector3D P_3(0.0f, 0.0f, -5.0f);
+        //Vector3D P_4(3.0f, 0.0f, 0.0f);
 
-        Vector3D d = D.normalize() * 2.0f;
+        //Vector3D d = D.normalize() * 2.0f;
 
-        float prod1 = D.dot(P_1);//+ Verde
-        float prod2 = D.dot(P_2);//+ Verde
-        float prod3 = D.dot(P_3);//- Rojo
-        float prod4 = D.dot(P_4);//= Amarillo
+        //float prod1 = D.dot(P_1);//+ Verde
+        //float prod2 = D.dot(P_2);//+ Verde
+        //float prod3 = D.dot(P_3);//- Rojo
+        //float prod4 = D.dot(P_4);//= Amarillo
 
-        m_transformD = physx::PxTransform(d);
-        m_renderItemD = new RenderItem(shape, &m_transformD, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
-        m_transformV1 = physx::PxTransform(P_1);
-        m_renderItemV1 = new RenderItem(shape, &m_transformV1, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
-        m_transformV2 = physx::PxTransform(P_2);
-        m_renderItemV2 = new RenderItem(shape, &m_transformV2, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
-        m_transformV3 = physx::PxTransform(P_3);
-        m_renderItemV3 = new RenderItem(shape, &m_transformV3, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
-        m_transformV4 = physx::PxTransform(P_4);
-        m_renderItemV4 = new RenderItem(shape, &m_transformV4, Vector4(1.0f, 1.0f, 0.0f, 1.0f));
+        //m_transformD = physx::PxTransform(d);
+        //m_renderItemD = new RenderItem(shape, &m_transformD, Vector4(0.0f, 0.0f, 0.0f, 1.0f));
+        //m_transformV1 = physx::PxTransform(P_1);
+        //m_renderItemV1 = new RenderItem(shape, &m_transformV1, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+        //m_transformV2 = physx::PxTransform(P_2);
+        //m_renderItemV2 = new RenderItem(shape, &m_transformV2, Vector4(0.0f, 1.0f, 0.0f, 1.0f));
+        //m_transformV3 = physx::PxTransform(P_3);
+        //m_renderItemV3 = new RenderItem(shape, &m_transformV3, Vector4(1.0f, 0.0f, 0.0f, 1.0f));
+        //m_transformV4 = physx::PxTransform(P_4);
+        //m_renderItemV4 = new RenderItem(shape, &m_transformV4, Vector4(1.0f, 1.0f, 0.0f, 1.0f));
     }
 
     void update(double dt) override {

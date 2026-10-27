@@ -33,7 +33,17 @@ Generador::updateUniforme(double t) {
 
 void
 Generador::update(double t) {
-	for (auto p : particles) {
-		p->integrate(t);
+
+	for (auto it = particles.begin(); it != particles.end(); ) {
+		(*it)->integrate(t);
+
+		// Si la partícula ha superado su tiempo de vida
+		if ((*it)->isDead()) {
+			delete* it;
+			it = particles.erase(it);
+		}
+		else {
+			++it;
+		}
 	}
 }
