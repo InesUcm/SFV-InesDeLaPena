@@ -112,7 +112,7 @@ void initPhysics(bool interactive)
 	SceneManager::instance().registerScene<P2S_Scene>("P2S_Scene");
 	
 	// Cargar la escena inicial
-	SceneManager::instance().changeScene("P2S_Scene");
+	SceneManager::instance().changeScene("P1S_Scene");
 
 	//Paricula
 	Vector3D initialPos(-10.0f, 0.0f, 0.0f);

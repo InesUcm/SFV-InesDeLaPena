@@ -10,12 +10,21 @@ Generador::Generador(Vector3D pos, Vector3D vel, float maxi, float mini):
 	pose = physx::PxTransform(pos);
 }
 
+Generador::~Generador()
+{
+	for (Particle* p : particles) {
+		//lanza una excepcion por las particulas que ya se borraron antes de borrar el generador
+		//hay que eliminar las particulas del vector cuando se borran
+		delete p; // Libera cada partícula viva que quedara en el generador
+	}
+	particles.clear();
+}
+
 void
 Generador::updateUniforme(double t) {
 	std::uniform_real_distribution<float> distPos(static_cast<float>(mini), static_cast<float>(maxi));
 	float posX = distPos(generator);
 	float posZ = distPos(generator);
-	std::cout << "Particula: " << posX << ", " << posZ << std::endl;
 	Vector3D posParicle(posX, pose.q.y, posZ);
 	Vector4 color(1.0f, 1.0f, 1.0f, 1.0f);
 

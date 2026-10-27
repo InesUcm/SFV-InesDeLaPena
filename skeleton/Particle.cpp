@@ -11,16 +11,15 @@ Particle::Particle(Vector3D pos, Vector3D vel, Vector4 color, Vector3D acc, floa
 	vel(vel), color(color), acc(acc), damping(damping)
 {
 	pose = physx::PxTransform(pos);
-	physx::PxShape* shape = CreateShape(physx::PxSphereGeometry(0.8f));
-	renderItem = new RenderItem(shape, &pose, color);
+	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(0.8f)), &pose, color);
 	liveTime = std::uniform_real_distribution<float>(3.0f, 6.0f)(generator);
-	std::cout << "Particula: " << liveTime << std::endl;
 }
 
 
 Particle::~Particle()
 {
 	if (renderItem) {
+		std::cout << "borrando particula" << std::endl;
 		renderItem->release();
 		renderItem = nullptr;
 	}
@@ -29,8 +28,11 @@ Particle::~Particle()
 void Particle::integrate(double dt)
 {
 	timeAlive += dt;
-	if (timeAlive > liveTime)
+	if (timeAlive > liveTime) {
 		Particle::~Particle();
+		delete this;
+		return;
+	}
 	semiImplicitEuler(dt);
 }
 

@@ -8,16 +8,11 @@ Proyectil::Proyectil(Vector3D pos, Vector3D velReal, Vector3D velSim, float masa
 
 Proyectil::~Proyectil()
 {
-	// Liberación del RenderItem para evitar fugas de memoria
-	if (renderItem) {
-		renderItem->release();
-		renderItem = nullptr;
-	}
 }
 
 void Proyectil::update(double t)
 {
-	semiImplicitEuler(t);
+	integrate(t);
 }
 
 void Proyectil::updateProyectil()

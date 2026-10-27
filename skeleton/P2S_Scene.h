@@ -24,7 +24,10 @@ public:
     }
 
     void cleanup() override {
-        generador = nullptr;
+        if (generador) {
+            delete generador;
+            generador = nullptr;
+        }
     }
 
 private:

@@ -8,7 +8,7 @@ class Particle
 {
 public:
 	Particle(Vector3D Pos, Vector3D Vel, Vector4 color = Vector4(1.0f, 1.0f, 1.0f, 1.0f), Vector3D Acc = Vector3D(0.0f, 0.0f, 0.0f), float damping = 0.99f); //Particula con aceleracion
-	~Particle();
+	virtual ~Particle();
 
 	void integrate(double t);
 	void euler(double t);
