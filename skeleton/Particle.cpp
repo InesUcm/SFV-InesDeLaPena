@@ -12,7 +12,7 @@ Particle::Particle(Vector3D pos, Vector3D vel, Vector4 color, Vector3D acc, floa
 {
 	pose = physx::PxTransform(pos);
 	renderItem = new RenderItem(CreateShape(physx::PxSphereGeometry(0.8f)), &pose, color);
-	liveTime = std::uniform_real_distribution<float>(3.0f, 6.0f)(generator);
+	liveTime = std::uniform_real_distribution<float>(2.0f, 3.5f)(generator);
 }
 
 

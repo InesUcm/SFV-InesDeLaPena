@@ -4,13 +4,16 @@
 #include "Particle.h"
 #include <random>
 #include <chrono>
+
+
 class Generador
 {
 public:
 	Generador(Vector3D pos, Vector3D vel, float max, float min);
 	~Generador();
 
-	void updateUniforme(double t);
+	void updateNieve(double t);
+	void updateFuente(double t);
 	void update(double t);
 
 private:

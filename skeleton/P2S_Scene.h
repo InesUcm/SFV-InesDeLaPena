@@ -14,26 +14,38 @@ public:
     }
 
     void init() override {
-        Vector3D pos(0, 100, 0);
+        Vector3D pos(-20.0f, 40.0f, 0.0f);
         Vector3D vel(0, -15, 0);
-        generador = new Generador(pos, vel, 25, -25);
+        generadorNieve = new Generador(pos, vel, 10.0f, -10.0f);
+
+        Vector3D pos1(0, 0, 0);
+        Vector3D vel1(0, 18, 0);
+        generadorFuente = new Generador(pos1, vel1, 3.0f, -3.0f);
     }
 
     void update(double dt) override {
-        generador->updateUniforme(dt);
-        generador->update(dt);
+        generadorNieve->updateNieve(dt);
+        generadorNieve->update(dt);
+
+        generadorFuente->updateFuente(dt);
+        generadorFuente->update(dt);
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
     }
 
     void cleanup() override {
-        if (generador) {
-            delete generador;
-            generador = nullptr;
+        if (generadorNieve) {
+            delete generadorNieve;
+            generadorNieve = nullptr;
+        }
+        if (generadorFuente) {
+            delete generadorFuente;
+            generadorFuente = nullptr;
         }
     }
 
 private:
-    Generador* generador{ nullptr };
+    Generador* generadorNieve{ nullptr };
+    Generador* generadorFuente { nullptr };
 };

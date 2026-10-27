@@ -20,14 +20,37 @@ Generador::~Generador()
 	particles.clear();
 }
 
-void
-Generador::updateUniforme(double t) {
-	std::uniform_real_distribution<float> distPos(static_cast<float>(mini), static_cast<float>(maxi));
-	float posX = distPos(generator);
-	float posZ = distPos(generator);
-	Vector3D posParicle(posX, pose.q.y, posZ);
-	Vector4 color(1.0f, 1.0f, 1.0f, 1.0f);
+void 
+Generador::updateFuente(double t) {
+	//Todas las particulas aparecen en la misma posicion
+	Vector3D posParticula(pose.p.x, pose.p.y, pose.p.z);
+	Vector4 color(0.2f, 0.6f, 1.0f, 1.0f); // Color azul
 
+	//Calculamos cuanto se va a esparzir la particula (cuanto se mueev en x y en z)
+	std::uniform_real_distribution<float> distSpread(mini, maxi); // mini = -5, maxi = 5
+
+	float vx = distSpread(generator);
+	float vz = distSpread(generator);
+
+	Vector3D velocidadFinal(vx, vel.y, vz);
+	//Le aplicamos gravedad
+	Vector3D aceleracion(0.0f, -10.0f, 0.0f);
+
+	//Creamos la partícula
+	particles.push_back(new Particle(posParticula, velocidadFinal, color, aceleracion));
+}
+
+void
+Generador::updateNieve(double t) {
+	//Calculamos la psoicion en la que aparecera la particula
+	std::uniform_real_distribution<float> distPos(static_cast<float>(mini), static_cast<float>(maxi));
+	float posX = pose.p.x + distPos(generator);
+	float posZ = pose.p.z + distPos(generator);
+	float posY = pose.p.y;
+	Vector3D posParicle(posX, posY, posZ);
+	Vector4 color(1.0f, 1.0f, 1.0f, 1.0f); //Color blanco
+
+	//Creamos la particula
 	particles.push_back(new Particle(posParicle, vel, color));
 }
 
