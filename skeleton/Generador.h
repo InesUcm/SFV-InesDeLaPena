@@ -9,17 +9,22 @@
 class Generador
 {
 public:
-	Generador(Vector3D pos, Vector3D vel, float max, float min);
+	Generador(Vector3D pos, Vector3D vel, float media, float desviacion);
 	~Generador();
 
-	void updateNieve(double t);
-	void updateFuente(double t);
+	void updateNieve();
+	void updateFuente();
+	void updateExplosion();
 	void update(double t);
 
 private:
 	Vector3D vel;
 	float maxi;
 	float mini;
+	float media;
+	float desviacion;
+
+	Vector3D gauss(float media, float desviacion);
 
 	physx::PxTransform pose;
 	std::vector<Particle*> particles;

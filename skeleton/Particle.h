@@ -16,6 +16,9 @@ public:
 	bool isDead() {
 		return dead;
 	}
+	void setLiveTime(float time) {
+		liveTime = time;
+	}
 
 protected:
 	Vector3D vel;
