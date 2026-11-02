@@ -14,6 +14,7 @@ public:
     }
 
     void init() override {
+        std::cout << "Cargando escena 2" << std::endl;
         Vector3D pos(-20.0f, 40.0f, 35.0f);
         Vector3D vel(0, -15, 0);
         generadorNieve = new Generador(pos, vel, 0.0f, 5.0f);

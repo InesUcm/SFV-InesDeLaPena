@@ -50,13 +50,17 @@ void Particle::euler(double dt) {
 void Particle::semiImplicitEuler(double dt)
 {
 	float deltaTime = static_cast<float>(dt);
+	Vector3D totalAcc = acc + (forceAccum * inverseMass);
 
-	// actualizamos la velocidad
-	vel = vel + acc * deltaTime;
+	//actualizamos la velocidad usando la aceleración total
+	vel = vel + totalAcc * deltaTime;
 
-	// aplicamos el damping
+	//aplicamos el damping
 	vel = vel * std::pow(damping, deltaTime);
 
-	// actualizamos la posicion
+	//actualizamos la posicion
 	pose.p = pose.p + vel * deltaTime;
+
+	//Limpiamos las fuerzas acumuladas para el siguiente frame
+	clearForce();
 }

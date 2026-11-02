@@ -4,6 +4,7 @@
 // Solicita el cambio de escena. Si el nombre no está registrado, se escribe
 // un error en stderr y la solicitud se ignora.
 void SceneManager::changeScene(const std::string& name) {
+    std::cout << name << std::endl;
     if (m_factories.find(name) == m_factories.end()) {
         std::cerr << "[SceneManager Error] Escena no registrada: " << name << "\n";
         return;
@@ -63,6 +64,10 @@ void SceneManager::keyPress(unsigned char key, const physx::PxTransform& cameraT
     }
     if (key == '2') {
         changeScene("P2S_Scene");
+        return;
+    }
+    if (key == '3') {
+        changeScene("P3S_Scene");
         return;
     }
 
