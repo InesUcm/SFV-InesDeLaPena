@@ -63,27 +63,34 @@ Generador::updateNieve() {
 	Vector4 color(1.0f, 1.0f, 1.0f, 1.0f); //Color blanco
 
 	//Creamos la particula
-	particles.push_back(new Particle(pos, vel, color));
+	Particle* nuevaParticula = new Particle(pos, vel, color);
+	nuevaParticula->setMass(0.5f);
+
+	particles.push_back(nuevaParticula);
 }
 
 void Generador::updateExplosion() {
-	// 1. Posición fija: Nace exactamente en el punto de impacto/origen
+	//Posición fija
 	Vector3D posParticula(pose.p.x, pose.p.y, pose.p.z);
-
-	// 2. Color de chispa de fuego (Naranja / Amarillo brillante)
+	// Velocidad en todas las direcciones usando Gauss
+	Vector3D velocidadFinal = gauss(0.0f, 8.0f);
+	// Color
 	Vector4 color(1.0f, 0.5f, 0.1f, 1.0f);
 
-	// 3. Velocidad en TODAS las direcciones usando Gauss
-	// Media 0.0f y desviación alta (ej: 8.0f) para que se dispersen en esfera
-	Vector3D velocidadFinal = gauss(0.0f, 8.0f);
 
-	// 4. Creamos la partícula y la metemos al vector
 	Particle* nuevaParticula = new Particle(posParticula, velocidadFinal, color);
 
-	// 2. ⏱️ AQUÍ REDUCIMOS SU VIDA (ej: que duren solo 1.0 segundo o 0.8 segundos)
-	nuevaParticula->setLiveTime(1.0f);
+	nuevaParticula->setLiveTime(3.0f);
 
-	// 3. La metemos al vector
+	//Hacemos que unas partículas tengan masa 1.0 y otras masa 5.0
+	static bool alterna = false;
+	alterna = !alterna;
+	if (alterna) {
+		nuevaParticula->setMass(1.0f); // Objeto ligero
+	}
+	else {
+		nuevaParticula->setMass(5.0f); // Objeto pesado
+	}
 	particles.push_back(nuevaParticula);
 }
 

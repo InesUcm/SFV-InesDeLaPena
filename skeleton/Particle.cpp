@@ -19,7 +19,6 @@ Particle::Particle(Vector3D pos, Vector3D vel, Vector4 color, Vector3D acc, floa
 Particle::~Particle()
 {
 	if (renderItem) {
-		std::cout << "borrando particula" << std::endl;
 		renderItem->release();
 		renderItem = nullptr;
 	}

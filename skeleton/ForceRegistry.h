@@ -16,4 +16,6 @@ public:
     void add(Particle* particle, ForceGenerator* fg);
     void remove(Particle* particle, ForceGenerator* fg);
     void updateForces(double duration);
+    void cleanDeletedParticles();
+    void clear();
 };

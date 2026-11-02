@@ -17,6 +17,8 @@ public:
 	void updateExplosion();
 	void update(double t);
 
+	std::vector<Particle*>& getParticles() { return particles; }
+
 private:
 	Vector3D vel;
 	float maxi;

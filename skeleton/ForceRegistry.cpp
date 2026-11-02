@@ -18,3 +18,20 @@ void ForceRegistry::updateForces(double duration) {
         reg.fg->updateForce(reg.particle, duration);
     }
 }
+
+void ForceRegistry::cleanDeletedParticles() {
+    for (auto it = registrations.begin(); it != registrations.end(); ) {
+
+        // Una forma muy segura y sencilla es limpiar el registro por completo al inicio del frame 
+        // y que el generador las vuelva a registrar si siguen vivas, O comprobar si la partícula está muerta:
+        if (it->particle->isDead()) {
+            it = registrations.erase(it);
+        }
+        else {
+            ++it;
+        }
+    }
+}
+void ForceRegistry::clear() {
+    registrations.clear();
+}

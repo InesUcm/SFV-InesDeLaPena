@@ -41,6 +41,8 @@ public:
 		forceAccum = Vector3D(0.0f, 0.0f, 0.0f);
 	}
 
+	Vector3D Particle::getVel() { return vel; }
+
 protected:
 	Vector3D vel;
 	Vector3D acc;
