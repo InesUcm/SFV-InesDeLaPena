@@ -22,7 +22,6 @@ Generador::~Generador()
 
 Vector3D 
 Generador::gauss(float media, float desviacion) {
-	//Usamos la distribucion normal
 	std::normal_distribution<float> dist(media, desviacion);
 
 	// Generamos un valor aleatorio para cada componente

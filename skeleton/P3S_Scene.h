@@ -64,6 +64,14 @@ public:
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
+        if (key == 'z') {
+            bool estadoActual = windGen->isActive();
+            windGen->setActive(!estadoActual); // Alterna entre encendido y apagado
+        }
+        else if (key == 'x') {
+            bool estadoActual = gravityGen->isActive();
+            gravityGen->setActive(!estadoActual); // Alterna entre encendido y apagado
+        }
     }
 
     void cleanup() override {

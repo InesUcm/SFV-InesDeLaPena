@@ -28,17 +28,34 @@ public:
     }
 
     void update(double dt) override {
-        generadorNieve->updateNieve();
-        generadorNieve->update(dt);
-
-        generadorFuente->updateFuente();
-        generadorFuente->update(dt);
-
-        generadorExplosion->updateExplosion();
-        generadorExplosion->update(dt);
+        if (generadorNieve->isActive()) {
+            generadorNieve->updateNieve();
+            generadorNieve->update(dt);
+        }
+        if (generadorFuente->isActive()) {
+            generadorFuente->updateFuente();
+            generadorFuente->update(dt);
+        }
+        if (generadorExplosion->isActive()) {
+            generadorExplosion->updateExplosion();
+            generadorExplosion->update(dt);
+        }
     }
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
+
+        if (key == 'z') {
+            bool estadoActual = generadorNieve->isActive();
+            generadorNieve->setActive(!estadoActual); // Alterna entre encendido y apagado
+        }
+        if (key == 'x') {
+            bool estadoActual = generadorFuente->isActive();
+            generadorFuente->setActive(!estadoActual); // Alterna entre encendido y apagado
+        }
+        if (key == 'c') {
+            bool estadoActual = generadorExplosion->isActive();
+            generadorExplosion->setActive(!estadoActual); // Alterna entre encendido y apagado
+        }
     }
 
     void cleanup() override {

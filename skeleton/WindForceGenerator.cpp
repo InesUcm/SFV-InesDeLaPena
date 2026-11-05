@@ -14,17 +14,17 @@ void WindForceGenerator::updateForce(Particle* particle, double duration) {
     //Velocidad relativa del viento respecto a la partícula: (v_viento - v_particula)
     Vector3D relativeVel = windVelocity - particleVel;
 
-    // 3. Magnitud (longitud) de la velocidad relativa: ||v_viento - v_particula||
+    //Magnitud (longitud) de la velocidad relativa: ||v_viento - v_particula||
     float speed = relativeVel.magnitude();
 
 
-    // 4. Aplicamos la fórmula: F_v = k1 * relVel + k2 * ||relVel|| * relVel
+    //Aplicamos la fórmula: F_v = k1 * relVel + k2 * ||relVel|| * relVel
     Vector3D force = relativeVel * k1;
 
     if (k2 != 0.0f) {
         force += relativeVel * (speed * k2);
     }
 
-    // 5. Acumulamos la fuerza en la partícula
+    //Acumulamos la fuerza en la partícula
     particle->addForce(force);
 }

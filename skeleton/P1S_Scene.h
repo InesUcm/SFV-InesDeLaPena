@@ -35,15 +35,17 @@ public:
 
     void keyPress(unsigned char key, const physx::PxTransform& camera) override {
 
-        Vector3D cameraDir;
-        float masaReal = 15.0f;
+        Vector3D cameraDir = GetCamera()->getDir();
 
-        if (key == '+') {
-            proyectil->setNewMass(masaReal + 1.0f);
+        if (key == 'z') {
+            // Dispara una cañon
+            std::cout << "Disparando cañon" << std::endl;
+            proyectiles.push_back(new Proyectil(GetCamera()->getEye(), cameraDir * 250, cameraDir * 120, 15.0f, Proyectil::CANON));
         }
-        else if (key == ' ') {
-            cameraDir = GetCamera()->getDir();
-            proyectiles.push_back(new Proyectil(GetCamera()->getEye(), cameraDir*200, cameraDir*120, masaReal));
+        else if (key == 'x') {
+            // Dispara una bala
+            std::cout << "Disparando bala" << std::endl;
+            proyectiles.push_back(new Proyectil(GetCamera()->getEye(), cameraDir * 350, cameraDir * 150, 0.5f, Proyectil::BALA));
         }
     }
 

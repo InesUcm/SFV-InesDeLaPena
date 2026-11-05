@@ -14,8 +14,10 @@ void ForceRegistry::remove(Particle* particle, ForceGenerator* fg) {
 }
 
 void ForceRegistry::updateForces(double duration) {
-    for (const auto& reg : registrations) {
-        reg.fg->updateForce(reg.particle, duration);
+    for (auto& reg : registrations) {
+        if (reg.fg && reg.fg->isActive()) {
+            reg.fg->updateForce(reg.particle, duration);
+        }
     }
 }
 

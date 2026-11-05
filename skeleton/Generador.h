@@ -8,14 +8,22 @@
 
 class Generador
 {
+protected:
+	bool active = true;
+
 public:
 	Generador(Vector3D pos, Vector3D vel, float media, float desviacion);
 	~Generador();
 
+	//Tres generadores de particulas distintos: de nieve, de fuente y de explosion
 	void updateNieve();
 	void updateFuente();
 	void updateExplosion();
+
 	void update(double t);
+
+	void setActive(bool state) { active = state; }
+	bool isActive() const { return active; }
 
 	std::vector<Particle*>& getParticles() { return particles; }
 

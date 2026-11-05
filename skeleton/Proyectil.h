@@ -4,15 +4,26 @@
 class Proyectil: public Particle
 {
 public:
+	enum TipoProyectil {
+		CANON,
+		BALA
+	};
 
-	Proyectil(Vector3D pos, Vector3D velReal, Vector3D velSim, float masaReal,  float gReal = -9.8f, float damping = 0.99f); //Proyectil
+	Proyectil(Vector3D pos, Vector3D velReal, Vector3D velSim, float masaReal, TipoProyectil tipo, float gReal = -9.8f); //Proyectil
 	~Proyectil();
 
 	void setNewMass(float newMassReal);
 	void updateProyectil();
 	void update(double t);
 
+	void escalarVelocidad(float factor);
+	void escalarEnergia(float factor);
+	void escalarFuerzas(float factor);
+
+	TipoProyectil getTipo() const { return tipo; }
+
 private:
+	TipoProyectil tipo;
 
 	//Proyectiles
 	// Ms = Mr * Vr^2 / Vs^2
